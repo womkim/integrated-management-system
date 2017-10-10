@@ -10,7 +10,7 @@
 $font-dark-color: #1e3147;
 $font-light-color: #9ba7b6;
  // 主题背景
-$body-bgcolor: #fff;
+$body-bgcolor: #fafafa;
 // 链接颜色
 $link-color: #0076ff;
 // 向右的箭头的颜色
@@ -31,5 +31,12 @@ $sider-fold-width: 42px;
 $sider-width: 224px;
 
 // 阴影颜色
-$shadow-color: #e6e6e6;
+$shadow-nav-color: #eaeaea;
+$shadow-sider-color: #f9f9f9;
+
+/* 侧边栏主题背景 */
+$dark-theme-bg-color: #3f3f3f;
+$dark-theme-font-color: #ddd;
+$light-theme-bg-color: #fefefe;
+$light-theme-font-color: #303030;
 

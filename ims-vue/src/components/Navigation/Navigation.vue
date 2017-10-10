@@ -44,7 +44,7 @@
     left: $sider-fold-width;
     height: $nav-height;
     background-color: $nav-bgcolor;
-    box-shadow: 0 0 20px $shadow-color;
+    box-shadow: 0 0 20px $shadow-nav-color;
     transition: all .3s;
 
     &.no-menu{

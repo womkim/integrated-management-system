@@ -1,7 +1,8 @@
 export default {
   state: {
     isNavbar: window.document.body.clientWidth < 769,
-    siderFold: false
+    siderFold: false,
+    darktheme: true
   },
   mutations: {
     switchSider (state) {
@@ -12,6 +13,9 @@ export default {
       if (isNavbar !== state.isNavbar) {
         state.isNavbar = isNavbar
       }
+    },
+    switchTheme (state) {
+      state.darktheme = !state.darktheme
     }
   },
   actions: {
