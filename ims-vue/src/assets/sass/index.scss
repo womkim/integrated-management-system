@@ -1,0 +1,10 @@
+
+/*
+ *  引入公共样式
+ */
+@import './normalize';        // 使用normalize.css进行样式重置
+@import './global_reset';     // 基于normalize自定义重置样式和定义的全局样式
+@import './iconfont';        // 定义的字体
+@import './variables';        // 定义的变量
+@import './mixins';           // 引入mixins
+
