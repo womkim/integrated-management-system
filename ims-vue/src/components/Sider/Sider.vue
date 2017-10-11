@@ -3,17 +3,26 @@
     :class="[darktheme ? 'dark-theme' : 'light-theme', siderFold && !isNavbar ? 'fold' : '']",
     v-show="!isNavbar"
   )
-    p sider
-    button(@click="toggleTheme") switch
+    .logo
+      img(src="../../assets/images/logo.png", alt="logo", :class="{'mini-img': siderFold}")
+      span(v-show="!siderFold") {{ $store.state.app.name}}
+    .switch-theme(v-show="!siderFold", :class="{'light-switch': !darktheme}")
+      span Switch Theme
+      //- .switch-btn(@click="toggleTheme") pp
+      v-switch(:checked="true", @onClick="toggleBtn", checkValue="Dark", unCheckValue="Light")
 </template>
 
 <script>
+  import VSwitch from '@/components/Switch/Switch'
   export default {
     name: 'sider',
     data () {
       return {
 
       }
+    },
+    components: {
+      'v-switch': VSwitch
     },
     computed: {
       siderFold () {
@@ -24,10 +33,17 @@
       },
       darktheme () {
         return this.$store.state.app.darktheme
+      },
+      logo () {
+        return this.$store.state.app.logo
       }
     },
     methods: {
       toggleTheme () {
+        this.$store.commit('switchTheme')
+      },
+      toggleBtn (checked) {
+        console.log(checked)
         this.$store.commit('switchTheme')
       }
     }
@@ -62,6 +78,58 @@
     &.light-theme{
       background-color: $light-theme-bg-color;
       color: $light-theme-font-color;
+    }
+
+    .logo{
+      margin: 20px 6px;
+      padding: 10px 0;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      overflow: hidden;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all .3s;
+
+      img{
+        width: 40px;
+        margin-right: 8px;
+        vertical-align: middle;
+        transition: all .3s;
+      }
+      .mini-img{
+        width: 28px;
+      }
+
+      span{
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+
+    .switch-theme{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      padding: 0 16px 0 24px;
+      width: 100%;
+      line-height: 48px;
+      border-top: 1px solid $dark-theme-bg-color;
+      background-color: $dark-theme-bg-color + #101010;
+      color: $dark-theme-font-color;
+      font-size: 12px;
+      white-space: nowrap;
+      box-sizing: border-box;
+      transition: all .3s;
+
+      &.light-switch{
+        border-top: 1px solid $light-theme-bg-color - #101010;
+        background-color: $light-theme-bg-color + #101010;
+        color: $light-theme-font-color;
+      }
     }
 
   }

@@ -1,8 +1,13 @@
+import config from '../config'
+
 export default {
   state: {
     isNavbar: window.document.body.clientWidth < 769,
     siderFold: false,
-    darktheme: true
+    darktheme: true,
+    username: 'womkim',
+    logo: config.logo,
+    name: config.name
   },
   mutations: {
     switchSider (state) {
