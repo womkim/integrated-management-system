@@ -7,7 +7,9 @@
       img(src="../../assets/images/logo.png", alt="logo", :class="{'mini-img': siderFold}")
       span(v-show="!siderFold") {{ $store.state.app.name}}
     .switch-theme(v-show="!siderFold", :class="{'light-switch': !darktheme}")
-      span Switch Theme
+      div
+        i.iconfont.icon-bulb
+        span Switch Theme
       //- .switch-btn(@click="toggleTheme") pp
       v-switch(:checked="true", @onClick="toggleBtn", checkValue="Dark", unCheckValue="Light")
 </template>
@@ -94,17 +96,12 @@
       img{
         width: 40px;
         margin-right: 8px;
-        vertical-align: middle;
         transition: all .3s;
       }
       .mini-img{
         width: 28px;
       }
 
-      span{
-        display: inline-block;
-        vertical-align: middle;
-      }
     }
 
     .switch-theme{
@@ -130,6 +127,12 @@
         background-color: $light-theme-bg-color + #101010;
         color: $light-theme-font-color;
       }
+
+      .iconfont{
+        font-size: 12px;
+        margin-right: 4px;
+      }
+
     }
 
   }

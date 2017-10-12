@@ -4,11 +4,11 @@
       i.iconfont(:class="isNavbar ? 'icon-bars': siderFold ? 'icon-menuunfold' : 'icon-menufold'")
     .right-wrapper
       .home-btn
-        i.iconfont.icon-menufold
-        span Home
+        i.iconfont.icon-home
+        span home
       .user-menu
         .utitle
-          i.iconfont.icon-menufold
+          i.iconfont.icon-user
           span {{ username }}
         ul.submenu
           li.item(@click="logout")
@@ -101,6 +101,9 @@
           background-color: $nav-hover-bgcolor;
           color: $nav-hover-color;
         }
+        .iconfont{
+          font-size: 14px;
+        }
       }
 
       .user-menu{
@@ -112,6 +115,9 @@
             height: $nav-height - 5px;
             transform: translate3d(0, 0, 0);
           }
+        }
+        .iconfont{
+          font-size: 12px;
         }
       }
 
@@ -148,10 +154,6 @@
           line-height: $nav-height - 5px;
           text-align: left;
         }
-      }
-
-      .iconfont{
-        font-size: 12px;
       }
 
       span{
