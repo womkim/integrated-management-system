@@ -1,4 +1,6 @@
 import config from '../config'
+import axios from 'axios'
+import { arrayToTree } from '@/assets/js/utils'
 
 export default {
   state: {
@@ -7,7 +9,9 @@ export default {
     darktheme: true,
     username: 'womkim',
     logo: config.logo,
-    name: config.name
+    name: config.name,
+    menuList: [],
+    menuOpenId: ''
   },
   mutations: {
     switchSider (state) {
@@ -21,6 +25,9 @@ export default {
     },
     switchTheme (state) {
       state.darktheme = !state.darktheme
+    },
+    toggleMenu (state, id) {
+      state.menuOpenId = id === state.menuOpenId ? '' : id
     }
   },
   actions: {
@@ -37,6 +44,21 @@ export default {
       setTimeout(() => {
         commit('switchSider')
       }, 200)
+    },
+    loadMenuList ({ state }) {
+      axios('/api/getMenu', {
+        method: 'get',
+        params: {
+          token: '123'
+        }
+      }).then(data => {
+        const details = data.data.data
+        details.sort((a, b) => a.order - b.order)
+        console.log(details)
+        const result = arrayToTree(details)
+        console.log()
+        state.menuList = result
+      }).catch(e => { console.log(`-> error: ${e.message}`) })
     }
   }
 }

@@ -3,9 +3,17 @@
     :class="[darktheme ? 'dark-theme' : 'light-theme', siderFold && !isNavbar ? 'fold' : '']",
     v-show="!isNavbar"
   )
+
+    //- 顶部logo
     .logo
       img(src="../../assets/images/logo.png", alt="logo", :class="{'mini-img': siderFold}")
       span(v-show="!siderFold") {{ $store.state.app.name}}
+
+    //- menu菜单
+    v-menu.sider-menu(:class="darktheme ? 'dark-theme' : 'light-theme'",
+      :siderFold="siderFold")
+
+    //- 底部切换主题
     .switch-theme(v-show="!siderFold", :class="{'light-switch': !darktheme}")
       div
         i.iconfont.icon-bulb
@@ -16,15 +24,16 @@
 
 <script>
   import VSwitch from '@/components/Switch/Switch'
+  import VMenu from '@/components/Menu/Menu'
+
   export default {
     name: 'sider',
-    data () {
-      return {
-
-      }
+    created () {
+      this.$store.dispatch('loadMenuList')
     },
     components: {
-      'v-switch': VSwitch
+      'v-switch': VSwitch,
+      'v-menu': VMenu
     },
     computed: {
       siderFold () {
@@ -55,14 +64,15 @@
 <style lang="scss">
   @import '../../assets/sass/_variables.scss';
   .sider{
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
+    z-index: 1000;
     width: $sider-width;
     height: 100%;
     box-shadow: 0 2px 20px $shadow-sider-color;
-    transition: all .3s;
+    transition: width .3s;
 
     &.fold{
       width: $sider-fold-width;
@@ -73,14 +83,31 @@
     }
 
     &.dark-theme{
-      background-color: $dark-theme-bg-color;
-      color: $dark-theme-font-color;
+      @include dark-theme
+      .v-menu{
+        @include dark-theme
+      }
+      .submenu .v-menu{
+        background-color: #333;
+      }
+      .active{
+        background-color: #494949;
+      }
+    }
+    &.light-theme{
+      @include light-theme
+      .v-menu{
+        @include light-theme
+      }
+      .active{
+        background-color: $sider-hover-bgcolor;
+      }
     }
 
-    &.light-theme{
-      background-color: $light-theme-bg-color;
-      color: $light-theme-font-color;
+    .active{
+      color: $sider-hover-color;
     }
+
 
     .logo{
       margin: 20px 6px;
@@ -103,6 +130,13 @@
       }
 
     }
+
+    .sider-menu{
+      height: calc(100vh - 151px);
+      overflow-x: hidden;
+
+    }
+
 
     .switch-theme{
       display: flex;
@@ -136,4 +170,5 @@
     }
 
   }
+
 </style>

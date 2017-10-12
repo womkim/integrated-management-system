@@ -58,6 +58,7 @@
     top: 0;
     right: 0;
     left: $sider-fold-width;
+    z-index: 999;
     height: $nav-height;
     line-height: $nav-height - 1px;
     background-color: $nav-bgcolor;

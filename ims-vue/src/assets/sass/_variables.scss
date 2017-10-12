@@ -42,4 +42,16 @@ $dark-theme-bg-color: #3f3f3f;
 $dark-theme-font-color: #ddd;
 $light-theme-bg-color: #fefefe;
 $light-theme-font-color: #303030;
+$sider-hover-color: $nav-hover-color;
+$sider-hover-bgcolor: $nav-hover-bgcolor;
+
+@mixin dark-theme{
+  background-color: $dark-theme-bg-color;
+  color: $dark-theme-font-color;
+}
+
+@mixin light-theme{
+  background-color: $light-theme-bg-color;
+  color: $light-theme-font-color;
+}
 
