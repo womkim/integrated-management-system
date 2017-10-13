@@ -34,9 +34,6 @@
         type: Boolean
       }
     },
-    mounted () {
-      console.log(this.listdata)
-    },
     computed: {
       listdata () {
         return this.$store.state.app.menuList

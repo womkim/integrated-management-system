@@ -5,7 +5,7 @@
   )
 
     //- 顶部logo
-    .logo
+    .logo(@click="routerToHome")
       img(src="../../assets/images/logo.png", alt="logo", :class="{'mini-img': siderFold}")
       span(v-show="!siderFold") {{ $store.state.app.name}}
 
@@ -54,8 +54,10 @@
         this.$store.commit('switchTheme')
       },
       toggleBtn (checked) {
-        console.log(checked)
         this.$store.commit('switchTheme')
+      },
+      routerToHome () {
+        this.$router.push('/')
       }
     }
   }

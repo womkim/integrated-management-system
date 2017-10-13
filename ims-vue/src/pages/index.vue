@@ -2,7 +2,8 @@
   .app
     Navigation
     Sider
-    router-view.main(:style="$store.state.app.siderFold ? 'margin-left: 42px;' : ''")
+    keep-alive
+        router-view.main(:style="$store.state.app.isNavbar ? 'margin-left: 0;' : $store.state.app.siderFold ? 'margin-left: 42px;' : 'margin-left: 224px;'")
 </template>
 
 <script>
@@ -21,7 +22,7 @@
   .app{
     .main{
       position: relative;
-      margin: 46px 0 0 224px;
+      margin-top: 46px;
       padding: 20px;
       overflow-y: auto;
       transition: all .3s;

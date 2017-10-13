@@ -54,9 +54,7 @@ export default {
       }).then(data => {
         const details = data.data.data
         details.sort((a, b) => a.order - b.order)
-        console.log(details)
         const result = arrayToTree(details)
-        console.log()
         state.menuList = result
       }).catch(e => { console.log(`-> error: ${e.message}`) })
     }
