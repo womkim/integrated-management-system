@@ -2,9 +2,12 @@
   .setting-menu
     .m-modal-context(v-show="showContext", ref="modal", @contextmenu.stop.prevent="showContext=false")
       ul.m-context(ref="context")
-        li.m-context-item(@click="addItem")
+        li.m-context-item(@click="addItem(0)")
           i.iconfont.icon-setting
-          span 添加
+          span 添加同级
+        li.m-context-item(v-show="chooseId && showSecondLevel", @click="addItem(1)")
+          i.iconfont.icon-setting
+          span 添加下级
         li.m-context-item(v-show="chooseId", @click="editItem")
           i.iconfont.icon-setting
           span 编辑
@@ -13,6 +16,7 @@
           span 删除
     .m-title
       span
+      span ID
       span 菜单名称
       span 图标名称
       span 链接
@@ -26,6 +30,7 @@
                   @contextmenu.stop.prevent="openContextMenu(item._id, $event)")
         i.iconfont.lvla-list-item(:class="open[index] ? 'icon-folder-open' : 'icon-folder-close'",
                                   @click="toggleFold(index)")
+        span.lvla-list-item {{ item._id }}
         span.lvla-list-item {{ item.label }}
         span.lvla-list-item {{ item.icon }}
         span.lvla-list-item {{ item.uri }}
@@ -35,8 +40,9 @@
           li.lvlb-list(v-for="(list, i) in item.children",
                       :key="i",
                       :class="[{'u-gutter': i % 2 === 0, 'active': chooseId === list._id}]",
-                      @click.stop.prevent="selectItem(list._id)")
+                      @click.stop.prevent="selectItem(list._id, '2')")
             i.iconfont.icon-file.lvlb-list-item
+            span.lvlb-list-item {{ list._id }}
             span.lvlb-list-item {{ list.label }}
             span.lvlb-list-item {{ list.icon }}
             span.lvlb-list-item {{ list.uri }}
@@ -53,6 +59,7 @@
       return {
         chooseId: '',
         showContext: false,
+        showSecondLevel: true,
         open: ((self) => {
           const len = self.$store.state.app.menuList.length
           let obj = {}
@@ -74,6 +81,7 @@
     created () {
       window.document.addEventListener('click', () => {
         this.showContext = false
+        this.chooseId = ''
       })
     },
     computed: {
@@ -82,8 +90,9 @@
       }
     },
     methods: {
-      selectItem (id = '') {
+      selectItem (id = '', type) {
         this.chooseId = id
+        this.showSecondLevel = type !== '2'
       },
       toggleFold (index) {
         this.open[index] = !this.open[index]
@@ -106,11 +115,14 @@
           this.$refs.context.style.top = mHeight + 'px'
         })
       },
-      addItem () {
-        this.$router.push(`/setting-menu/add/0`)
+      addItem (type) {
+        const pid = type === 0 ? '0' : this.chooseId
+        this.$router.push({
+          path: `/setting-menu/add/${pid}`
+        })
       },
       editItem () {
-        this.$router.push(`/setting-menu/add/${this.chooseId}`)
+        this.$router.push(`/setting-menu/edit/${this.chooseId}`)
       },
       removeItem () {
         alert('you will remove an menu item')
@@ -153,7 +165,7 @@
       line-height: 40px;
       span{
         display: inline-block;
-        width: calc((100% - 40px) / 5);
+        width: calc((100% - 40px) / 6);
         // border-left: 1px solid $border-color;
         box-sizing: border-box;
         &:first-child{
@@ -189,7 +201,7 @@
       &-item{
         display: inline-block;
         padding-left: 10px;
-        width: calc((100% - 40px) / 5);
+        width: calc((100% - 40px) / 6);
         // border-left: 1px solid $border-color;
         box-sizing: border-box;
         &:first-child{
@@ -235,7 +247,7 @@
       &-item{
         display: inline-block;
         padding-left: 10px;
-        width: calc((100% - 40px) / 5);
+        width: calc((100% - 40px) / 6);
         // border-left: 1px solid $border-color;
         box-sizing: border-box;
         &:first-child{

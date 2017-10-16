@@ -11,7 +11,28 @@ export default {
     logo: config.logo,
     name: config.name,
     menuList: [],
-    menuOpenId: ''
+    menuOpenId: '',
+    icons: [
+      'icon-folder-open',
+      'icon-folder-close',
+      'icon-file',
+      'icon-arrow-down',
+      'icon-user',
+      'icon-barchart',
+      'icon-chartline',
+      'icon-chart',
+      'icon-bulb',
+      'icon-search',
+      'icon-edit',
+      'icon-camera',
+      'icon-home',
+      'icon-cart',
+      'icon-setting',
+      'icon-lab',
+      'icon-bars',
+      'icon-menufold',
+      'icon-menuunfold'
+    ]
   },
   mutations: {
     switchSider (state) {
@@ -55,6 +76,7 @@ export default {
         const details = data.data.data
         details.sort((a, b) => a.order - b.order)
         const result = arrayToTree(details)
+        console.log(result)
         state.menuList = result
       }).catch(e => { console.log(`-> error: ${e.message}`) })
     }

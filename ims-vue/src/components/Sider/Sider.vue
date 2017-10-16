@@ -112,8 +112,7 @@
 
 
     .logo{
-      margin: 20px 6px;
-      padding: 10px 0;
+      margin: 30px 6px;
       height: 40px;
       line-height: 40px;
       text-align: center;

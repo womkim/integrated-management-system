@@ -24,8 +24,11 @@
       position: relative;
       margin-top: 46px;
       padding: 20px;
-      overflow-y: auto;
+      overflow-y: visible;
       transition: all .3s;
+      @media only screen and (max-width: 376px) {
+        padding: 5px;
+      }
     }
   }
 </style>

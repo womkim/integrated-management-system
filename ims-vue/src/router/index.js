@@ -9,6 +9,10 @@ export default new Router({
   linkActiveClass: 'active',
   mode: 'history',
   routes: [{
+    name: 'index',
+    path: '/',
+    redirect: '/dashboard'
+  }, {
     name: 'SettingMenu',
     path: '/setting-menu',
     // component: resolve => require(['../pages/SettingMenu/SettingMenu.vue'], resolve) // 懒加载
@@ -16,7 +20,10 @@ export default new Router({
     children: []
   }, {
     path: '/setting-menu/:action/:id',
-    component: () => import('@/pages/Test')
+    component: () => import('@/pages/SettingMenu/MenuItem')
+  }, {
+    path: '/dashboard',
+    component: () => import('@/pages/Dashboard')
   }, {
     name: 'NotFound',
     path: '*',
