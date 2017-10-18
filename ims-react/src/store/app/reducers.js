@@ -6,10 +6,12 @@ import { combineReducers } from 'redux'
 import {
   TOGGLE_SIDER,
   CHANGE_NAVBAR,
-  SWITCH_THEME
-} from '@/constants/ActionTypes'
-import { app } from '@/constants/InitialState'
-import { api } from '@/utils/config'
+  SWITCH_THEME,
+  INVALIDATE_MENU,
+  REQUEST_DATA,
+  RECEIVE_DATA
+} from './constants'
+import { app } from '@/store/init'
 
 const siderFold = (state = app.siderFold, action) => {
   if (action.type === TOGGLE_SIDER) {
@@ -33,17 +35,41 @@ const darktheme = (state = app.darktheme, action) => {
   return state
 }
 
-const loadMenuList = async () => {
-  const response = await fetch(api.getMenu + '?token=123')
-  const menus = await response.json()
-  if (response.status !== 200) {
-    throw Error(menus.message)
+const fetchState = (state = app.fetchState, action) => {
+  switch (action.type) {
+    case INVALIDATE_MENU:
+      return {
+        ...state,
+        didInvalidate: true
+      }
+    case REQUEST_DATA:
+      return {
+        ...state,
+        isFetching: true,
+        didInvalidate: false
+      }
+    case RECEIVE_DATA:
+      return {
+        ...state,
+        isFetching: false,
+        didInvalidate: false,
+        items: action.items,
+        lastUpdated: action.receiveAt
+      }
+    default:
+      return state
   }
-  return menus
 }
 
 const menuList = (state = app.menuList, action) => {
-  return state
+  switch (action.type) {
+    case INVALIDATE_MENU:
+    case REQUEST_DATA:
+    case RECEIVE_DATA:
+      return fetchState(app.fetchState, action)
+    default:
+      return state
+  }
 }
 
 export default combineReducers({
