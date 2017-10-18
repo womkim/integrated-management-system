@@ -1,6 +1,20 @@
+/**
+ * Created by womkim on 2017/10/18.
+ */
+
 import React from 'react'
 import { render } from 'react-dom'
-import registerServiceWorker from './registerServiceWorker'
+import { Provider } from 'react-redux'
 
-render(<h3>Hello world</h3>, document.getElementById('root'))
+import store from '@/store'
+import Router from '@/router'
+
+import 'antd/dist/antd.css'
+
+import registerServiceWorker from '@/registerServiceWorker'
+
+render(<Provider store={store}>
+  <Router />
+</Provider>, document.getElementById('root'))
+
 registerServiceWorker()
