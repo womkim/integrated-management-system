@@ -6,9 +6,9 @@ import {
   TOGGLE_SIDER,
   CHANGE_NAVBAR,
   SWITCH_THEME,
-  INVALIDATE_MENU,
-  REQUEST_DATA,
-  RECEIVE_DATA
+  LOAD_MENU,
+  CHANGE_MENU_OPENID,
+  GET_USERINFO
 } from './constants'
 import { api } from '@/utils/config'
 
@@ -24,44 +24,42 @@ export const switchTheme = () => ({
   type: SWITCH_THEME
 })
 
-export const invalidateMenu = () => ({
-  type: INVALIDATE_MENU
+export const loadMenu = items => ({
+  type: LOAD_MENU,
+  items: items
 })
 
-export const requestData = () => ({
-  type: REQUEST_DATA
+export const changeMenuOpenId = id => ({
+  type: CHANGE_MENU_OPENID,
+  id
 })
 
-export const receiveData = items => ({
-  type: RECEIVE_DATA,
-  items: items.data,
-  receiveAt: Date.now()
+export const loadUser = (userinfo) => ({
+  type: GET_USERINFO,
+  userinfo
 })
 
-const loadMenuList = async (dispatch) => {
-  const response = await fetch(api.getMenu + '?token=123')
-  const menus = await response.json()
-  if (response.status !== 200) {
-    throw Error(menus.message)
-  }
-  dispatch(receiveData(menus))
-  return menus
+// 异步获取数据，return a function
+export const loadMenuList = () => dispatch => {
+  console.log('loadding menu list...')
+  return fetch(api.getMenu + '?token=123')
+    .then(response => response.json())
+    .then(data => {
+      if (data.code === 0) {
+        dispatch(loadMenu(data.data))
+      } else {
+        console.error(`request error: ${data.message}`)
+      }
+    })
+    .catch(e => console.error(`an error occured when loadding menu list: ${e.message}`))
 }
 
-const fetchData = () => dispatch => {
-  dispatch(requestData())
-  return loadMenuList()
-}
-
-const shouldFetchingData = (state, post) => {
-  if (post) {
-    return post
-  }
-  return false
-}
-
-export const fetchDataIfNeeded = (post) => (dispatch, getState) => {
-  if (shouldFetchingData(getState, post)) {
-    return dispatch(fetchData())
-  }
+export const loadUserinfo = () => dispatch => {
+  console.log('loadding userinfo..')
+  return fetch(api.showUsers + '?token=123')
+    .then(response => response.json())
+    .then(data => {
+      dispatch(loadUser({username: 'womkim'}))
+    })
+    .catch(e => console.error(`an error occured when loadding user info: ${e.message}`))
 }

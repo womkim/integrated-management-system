@@ -7,9 +7,9 @@ import {
   TOGGLE_SIDER,
   CHANGE_NAVBAR,
   SWITCH_THEME,
-  INVALIDATE_MENU,
-  REQUEST_DATA,
-  RECEIVE_DATA
+  LOAD_MENU,
+  CHANGE_MENU_OPENID,
+  GET_USERINFO
 } from './constants'
 import { app } from '@/store/init'
 
@@ -35,46 +35,32 @@ const darktheme = (state = app.darktheme, action) => {
   return state
 }
 
-const fetchState = (state = app.fetchState, action) => {
-  switch (action.type) {
-    case INVALIDATE_MENU:
-      return {
-        ...state,
-        didInvalidate: true
-      }
-    case REQUEST_DATA:
-      return {
-        ...state,
-        isFetching: true,
-        didInvalidate: false
-      }
-    case RECEIVE_DATA:
-      return {
-        ...state,
-        isFetching: false,
-        didInvalidate: false,
-        items: action.items,
-        lastUpdated: action.receiveAt
-      }
-    default:
-      return state
+const menuList = (state = app.menuList, action) => {
+  if (action.type === LOAD_MENU) {
+    return action.items
   }
+  return state
 }
 
-const menuList = (state = app.menuList, action) => {
-  switch (action.type) {
-    case INVALIDATE_MENU:
-    case REQUEST_DATA:
-    case RECEIVE_DATA:
-      return fetchState(app.fetchState, action)
-    default:
-      return state
+const menuOpenId = (state = app.menuOpenId, action) => {
+  if (action.type === CHANGE_MENU_OPENID) {
+    return action.id
   }
+  return state
+}
+
+const userinfo = (state = app.userinfo, action) => {
+  if (action.type === GET_USERINFO) {
+    return action.userinfo
+  }
+  return state
 }
 
 export default combineReducers({
   siderFold,
   isNavbar,
   darktheme,
-  menuList
+  menuList,
+  menuOpenId,
+  userinfo
 })

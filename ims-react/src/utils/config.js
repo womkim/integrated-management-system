@@ -11,6 +11,7 @@ module.exports = {
     userLogout: `${API_PREFIX}/user/logout`,
     userInfo: `${API_PREFIX}/userInfo`,
     users: `${API_PREFIX}/users`,
+    showUsers: `${API_PREFIX}/showUsers`,
     posts: `${API_PREFIX}/posts`,
     user: `${API_PREFIX}/user/:id`,
     dashboard: `${API_PREFIX}/dashboard`,

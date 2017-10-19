@@ -6,7 +6,7 @@ export const app = {
   siderFold: false,
   isNavbar: window.document.body.clientWidth < 769,
   darktheme: true,
-  username: '',
+  userinfo: {},
   fetchState: {
     isFetching: false,
     didInvalidate: false,
