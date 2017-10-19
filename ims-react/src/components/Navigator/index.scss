@@ -2,6 +2,37 @@
  * Created by womkim on 2017/10/19.
  */
 
-.m-sider{
-  color: #f40;
+.m-nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 224px;
+  box-shadow: 0 0 10px 0 #eee;
+  transition: all .3s;
+
+  &.fold-sider{
+    margin-left: 48px;
+  }
+
+  &-btn{
+    height: 48px;
+    line-height: 48px;
+    padding: 0 20px;
+    font-size: 14px;
+    cursor: pointer;
+    
+  }
+
+  .right-wrapper{
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+
+    .m-nav-btn{
+      &:hover{
+        background-color: #ecf6fd;
+        color: #108ee9;
+      }
+    }
+  }
 }
