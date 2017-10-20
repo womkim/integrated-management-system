@@ -4,17 +4,16 @@
 
 import React from 'react'
 import './index.scss'
+import { classname } from '@/utils/util'
 
 import { Link } from 'react-router-dom'
 import { Menu, Icon } from 'antd'
 const { SubMenu, Item } = Menu
 
-const classname = (arr) => arr.join(' ')
-
-class Navgator extends React.Component {
+class Navigator extends React.Component {
   render () {
     const { isNavbar, siderFold, darktheme, username, toggleSider } = this.props
-    return <div className={classname(['m-nav', !isNavbar && siderFold ? 'fold-sider' : null])}>
+    return <div className={classname(['m-nav', !isNavbar && siderFold ? 'fold-sider' : null, isNavbar ? 'navbar' : null])}>
 
       {isNavbar
         ? <div className="m-nav-btn"><Icon type="bars" /></div>
@@ -33,4 +32,4 @@ class Navgator extends React.Component {
   }
 }
 
-export default Navgator
+export default Navigator

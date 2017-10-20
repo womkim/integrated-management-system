@@ -7,11 +7,16 @@
   justify-content: space-between;
   align-items: center;
   margin-left: 224px;
-  box-shadow: 0 0 10px 0 #eee;
+  background-color: #fff;
+  box-shadow: 4px 4px 20px 0 rgba(0,0,0,.02);
   transition: all .3s;
 
   &.fold-sider{
     margin-left: 48px;
+  }
+
+  &.navbar{
+    margin-left: 0;
   }
 
   &-btn{
@@ -34,5 +39,9 @@
         color: #108ee9;
       }
     }
+  }
+
+  .ant-menu-horizontal{
+    border: none;
   }
 }
