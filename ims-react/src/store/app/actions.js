@@ -11,6 +11,7 @@ import {
   GET_USERINFO
 } from './constants'
 import { api } from '@/utils/config'
+import { arrayToTree } from '@/utils/util'
 
 export const toggleSider = () => ({
   type: TOGGLE_SIDER
@@ -46,7 +47,8 @@ export const loadMenuList = () => dispatch => {
     .then(response => response.json())
     .then(data => {
       if (data.code === 0) {
-        dispatch(loadMenu(data.data))
+        const result = arrayToTree(data.data, '_id')
+        dispatch(loadMenu(result))
       } else {
         console.error(`request error: ${data.message}`)
       }
