@@ -1,9 +1,10 @@
 <template lang="pug">
   .app
-    Navigation
     Sider
-    keep-alive
-        router-view.main(:style="$store.state.app.isNavbar ? 'margin-left: 0;' : $store.state.app.siderFold ? 'margin-left: 42px;' : 'margin-left: 224px;'")
+    .main(:style="$store.state.app.isNavbar ? 'margin-left: 0;' : $store.state.app.siderFold ? 'margin-left: 42px;' : 'margin-left: 224px;'")
+      Navigation
+      keep-alive
+          router-view
 </template>
 
 <script>

@@ -11,7 +11,7 @@
 
     //- menu菜单
     v-menu.sider-menu(:class="darktheme ? 'dark-theme' : 'light-theme'",
-      :siderFold="siderFold")
+      :siderFold="siderFold", :darktheme="darktheme")
 
     //- 底部切换主题
     .switch-theme(v-show="!siderFold", :class="{'light-switch': !darktheme}")

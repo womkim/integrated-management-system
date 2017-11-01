@@ -6,6 +6,7 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 
+import 'iview/dist/styles/iview.css'
 import './assets/sass/index.scss'
 
 Vue.config.productionTip = false
