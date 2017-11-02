@@ -66,5 +66,16 @@
       //   }
       // }
     }
+
+    .ivu-menu-dark{
+      &.ivu-menu-vertical{
+        .ivu-menu-item-active.ivu-menu-item-selected{
+          color: #fff;
+          background-color: #2d8cf0;
+        }
+      }
+    }
+
   }
+
 </style>

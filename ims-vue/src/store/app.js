@@ -1,10 +1,12 @@
 import config from '../config'
 import axios from 'axios'
+// import _ from 'lodash'
 import { arrayToTree } from '@/assets/js/utils'
 
 export default {
   state: {
     isNavbar: window.document.body.clientWidth < 769,
+    mainContainerWidth: window.document.body.clientWidth,
     siderFold: false,
     darktheme: true,
     username: 'womkim',
@@ -49,16 +51,22 @@ export default {
     },
     toggleMenu (state, id) {
       state.menuOpenId = id === state.menuOpenId ? '' : id
+    },
+    computeContainerWidth (state) {
+      state.mainContainerWidth = window.document.body.clientWidth
     }
   },
   actions: {
     initial ({ commit }) {
-      let tid
+      // let tid
       window.onresize = function () {
-        clearTimeout(tid)
-        tid = setTimeout(() => {
-          commit('changeNavbar')
-        }, 200)
+        // clearTimeout(tid)
+        // tid = setTimeout(() => {
+        //   commit('changeNavbar')
+        //   commit('computeContainerWidth')
+        // }, 200)
+        commit('changeNavbar')
+        commit('computeContainerWidth')
       }
     },
     switchSiderAsync ({ commit }) {

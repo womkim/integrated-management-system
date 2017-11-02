@@ -16,7 +16,7 @@ export default new Router({
     name: 'SettingMenu',
     path: '/setting-menu',
     // component: resolve => require(['../pages/SettingMenu/SettingMenu.vue'], resolve) // 懒加载
-    component: () => import('@/pages/SettingMenu/SettingMenu'),
+    component: () => import('@/pages/SettingMenu'),
     children: []
   }, {
     path: '/setting-menu/:action/:id',
