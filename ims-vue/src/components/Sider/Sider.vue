@@ -92,23 +92,23 @@
       .submenu .v-menu{
         background-color: #333;
       }
-      .active{
-        background-color: #494949;
-      }
+      // .active{
+      //   background-color: #494949;
+      // }
     }
     &.light-theme{
       @include light-theme
       .v-menu{
         @include light-theme
       }
-      .active{
-        background-color: $sider-hover-bgcolor;
-      }
+      // .active{
+      //   background-color: $sider-hover-bgcolor;
+      // }
     }
 
-    .active{
-      color: $sider-hover-color;
-    }
+    // .active{
+    //   color: $sider-hover-color;
+    // }
 
 
     .logo{

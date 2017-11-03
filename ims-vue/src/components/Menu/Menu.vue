@@ -7,12 +7,14 @@
             Icon(type="arrow-up-a")
             span {{ item.label }}
           menu-item(:name="list._id")
-            Icon(type="laptop")
-            span {{ list.label }}
+            router-link.m-link(:to="list.uri")
+              Icon(type="laptop")
+              span {{ list.label }}
       template(v-else)
         menu-item.m-item(:name="item._id")
-          Icon(type="laptop")
-          span {{ item.label }}
+          router-link.m-link(:to="item.uri")
+            Icon(type="laptop")
+            span {{ item.label }}
 </template>
 
 <script>
@@ -54,10 +56,21 @@
     box-sizing: border-box;
   }
   .menu{
-    span,i{
-      vertical-align: middle;
+    i{
+      vertical-align: sub;
     }
     .m-item{
+      &.ivu-menu-item{
+        padding: 0;
+      }
+      .ivu-menu-item{
+        padding: 0;
+      }
+      &.ivu-menu-submenu{
+        .m-link{
+          padding-left: 43px;
+        }
+      }
       // background-color: $dark-theme-bg-color;
       // &.ivu-menu-opened{
       //   background-color: $dark-theme-bg-color;
@@ -69,10 +82,19 @@
 
     .ivu-menu-dark{
       &.ivu-menu-vertical{
+
         .ivu-menu-item-active.ivu-menu-item-selected{
           color: #fff;
           background-color: #2d8cf0;
         }
+      }
+    }
+
+    .m-link{
+      display: block;
+      padding: 14px 24px;
+      span{
+        margin-left: 8px;
       }
     }
 
