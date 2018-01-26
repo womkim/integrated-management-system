@@ -11,10 +11,6 @@ import Router from '@/router'
 
 import 'antd/dist/antd.css'
 
-import registerServiceWorker from '@/registerServiceWorker'
-
 render(<Provider store={store}>
   <Router />
 </Provider>, document.getElementById('root'))
-
-registerServiceWorker()
