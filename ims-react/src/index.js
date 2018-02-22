@@ -11,6 +11,9 @@ import Router from '@/router'
 
 import 'antd/dist/antd.css'
 
-render(<Provider store={store}>
-  <Router />
-</Provider>, document.getElementById('root'))
+render(
+  <Provider store={store}>
+    <Router />
+  </Provider>,
+  document.getElementById('root')
+)

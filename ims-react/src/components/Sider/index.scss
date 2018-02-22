@@ -56,7 +56,7 @@
     transition: all .3s;
   }
 
-  .ant-menu-sub{
+  ul.ant-menu-sub{
     transition: all .3s;
   }
 
@@ -72,5 +72,13 @@
 
   .ant-menu-submenu-title{
     transition: all .3s;
+  }
+
+  .ant-menu-dark{
+    background-color: #404040;
+    ul.ant-menu-sub{
+      background-color: #424242;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) inset;
+    }
   }
 }

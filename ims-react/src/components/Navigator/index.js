@@ -7,7 +7,7 @@ import './index.scss'
 import { classname } from '@/utils/util'
 
 import { Link } from 'react-router-dom'
-import { Menu, Icon } from 'antd'
+import { Menu, Icon, Button } from 'antd'
 const { SubMenu, Item } = Menu
 
 class Navigator extends React.Component {
@@ -21,6 +21,12 @@ class Navigator extends React.Component {
       <div className="right-wrapper">
         <div className="m-nav-btn">
           <Icon type="home" />
+        </div>
+        <div>
+          <Button type="primary">Primary</Button>
+          <Button>Default</Button>
+          <Button type="dashed">Dashed</Button>
+          <Button type="danger">Danger</Button>
         </div>
         <Menu onClick={() => {}} mode="horizontal" >
           <SubMenu title={<span><Icon type="user" />{username}</span>}>
